@@ -1,0 +1,72 @@
+alhubert:
+  # Extractor
+  extractor_mode: default
+  extractor_conv_feature_layers: '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2'
+  extractor_dropout: 0.0
+  feature_grad_mult: 0.1
+
+  # Convolutional relative positional encoding
+  conv_pos: 128
+  conv_pos_groups: 16
+
+  # Transformer encoder
+  encoder_layers: 3
+  encoder_embed_dim: 768
+  encoder_ffn_embed_dim: 3072
+  encoder_attention_heads: 12
+  activation_fn: gelu
+  layer_norm_first: false
+
+  # mask
+  mask_length: 10
+  mask_prob: 0.65
+  mask_selection: static
+  mask_other: 0
+  no_mask_overlap: False
+  mask_min_space: 1
+  
+  # mask channel 
+  mask_channel_length: 10
+  mask_channel_prob: 0.0
+  mask_channel_selection: static
+  mask_channel_other: 0
+  no_mask_channel_overlap: False
+  mask_channel_min_space: 1
+
+  # Dropout
+  dropout: 0.1
+  attention_dropout: 0.1
+  activation_dropout: 0.0
+  encoder_layerdrop: 0.0
+
+  # Task & loss
+  loss_type: l2
+  feat_pen_loss: 0.0
+  cosine_loss: 1.0  # cosine similarity loss
+  student_mid_layers: "[1,3,5,7,9]"
+  teacher_mid_layers: "[1,3,5,7,9]"
+
+  # Initialization
+  init_teacher_conv_layers: true
+  init_teacher_encoder_layers: true
+
+  # alhubert
+  repeat_time: 4
+  teacher_feature_selection: no_feat
+
+  # CE
+  use_ce: false
+  # distil
+  use_ce_distil: false
+  # init
+  mse_distil_start_step: 0
+
+teacher:
+  model: hubert_local
+  path: "/mnt/c1/wanghaoyu/pretrain_models/hubert_base_ls960_hgface.pt"
+
+task:
+  sequence_length: 250000  # 15.6 secs; 781 samples
+
+audio:
+  target_level: None

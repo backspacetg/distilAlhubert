@@ -1,0 +1,14 @@
+numpy==1.22.0
+torch
+torchaudio
+tensorboardX==2.5.1
+easydict
+pyyaml
+tqdm
+pandas
+fairseq
+editdistance
+matplotlib
+h5py
+pytest-runner
+kaldiio
