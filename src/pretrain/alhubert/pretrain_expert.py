@@ -208,9 +208,9 @@ class AlhubertForPretrain(nn.Module):
         assert teacher.task_cfg.normalize == self.config.normalize
         assert teacher.model.encoder.layer_norm_first == self.config.layer_norm_first
         if teacher.model.encoder.layer_norm_first:
-            # 设置hook 获取经过layer norm之后的输出
+            # add new hook
             print("[AlhubertForPretrain] - Using hooking to get output features")
-            assert self.config.teacher_feature_selection == "no_feat" # 禁用原有expert的hook
+            assert self.config.teacher_feature_selection == "no_feat" # disable the original hooks
             self.teacher_hiddens_after_norm = []
             def layer_hook(module, input, output):
                 self.teacher_hiddens_after_norm.append(output.transpose(0, 1))
