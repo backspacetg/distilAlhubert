@@ -1,8 +1,8 @@
-### DistilALHuBERT
+# DistilALHuBERT
 
 This is an implementation of our paper *DistilALHuBERT: A Distilled Parameter Sharing Audio Representation Model*. This repository contains the pre-trained models and the codes. To use our model, you can either add our code to [S3PRL](https://github.com/s3prl/s3prl) as an additional "Upstream model" or use it separately. 
 
-#### Adding to S3PRL (Recommended)
+## Adding to S3PRL (Recommended)
 
 Our model is implemented by S3RPL, a flexible toolbox for pre-trained speech models. S3PRL support adding customized pre-trained models (called Upstream models) and customized pre-training methods. 
 
@@ -22,13 +22,13 @@ To add our code into S3PRL, you should:
 
 We recommend adding our code to your S3PRL installation to evaluate our pre-trained models on all the downstream tasks.
 
-#### Using the code separately
+## Using the code separately
 
 To use our code without S3PRL, you should
 
 * run `pip install -r requirement.txt` to install all the dependencies. 
 
-#### Extracting features
+## Extracting features
 
 You can extract features from the pre-trained model by
 
@@ -49,7 +49,7 @@ print(len(states["hidden_states"])) # list[torch.Tensor] hidden states of each l
 # This is because that the feature after layer norm is better for distillation.
 ```
 
-#### Pre-trained models
+## Pre-trained models
 
 The pre-trained models can be downloaded at: 
 
@@ -59,15 +59,15 @@ The pre-trained models can be downloaded at:
 | middle | [Google Drive](https://drive.google.com/file/d/1ummRt6_BxbCtJaqi-PnJ88UNaVglhYaQ/view?usp=sharing) |
 | large  | [Google Drive](https://drive.google.com/file/d/1ZQY3I44qAZ59ZXicqx3aNX0ytSoYf24N/view?usp=sharing) |
 
-#### Pre-training
+## Pre-training
 
 Take the small model (2*6=12 layers) for an example. 
 
-##### Step 1
+### Step 1
 
 Prepare the data according to [the instructions](https://github.com/s3prl/s3prl/blob/master/s3prl/pretrain/README.md#pre-training--upstream-models) in S3PRL. 
 
-##### Step 2
+### Step 2
 
 Edit  `s3prl/pretrain/alhubert/config_runner.yaml` to add the dataset path. 
 
@@ -91,7 +91,7 @@ teacher:
 
 We use the [pre-trained Hubert Base model](https://huggingface.co/s3prl/converted_ckpts/resolve/main/hubert_base_ls960.pt) provided by [hugging face](https://huggingface.co/). 
 
-##### Step 3:
+### Step 3:
 
 Perform distillation. 
 
@@ -111,7 +111,7 @@ python run_pretrain.py \
     --expdir $expdir/$name
 ```
 
-#### Fine-tuning
+## Fine-tuning
 
 If you have added our code to S3PRL, you can follow [the official instructions](https://github.com/s3prl/s3prl/blob/master/s3prl/downstream/docs/superb.md) to evaluate our model in all the downstream tasks. Our model is registered as `alhubert_local`. E.g., You can perform ASR fine-tuning by
 
@@ -136,7 +136,7 @@ python3 run_downstream.py \
 
 We also add ASR fine-tuning code to this repository and you can use similar code to evaluate the pre-trained model on the ASR task without S3PRL. For other tasks, we still recommend using S3PRL's official implementations. 
 
-#### Reference Repositories
+## Reference Repositories
 
 Most of the source code is based on [s3prl](https://github.com/s3prl/s3prl/) and [DistilHuBERT](https://github.com/s3prl/s3prl/tree/master/s3prl/upstream/distiller).
 
