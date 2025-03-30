@@ -9,7 +9,6 @@ import logging
 import torchaudio
 import numpy as np
 from argparse import Namespace
-
 from torch.distributed import is_initialized, get_world_size
 
 from src import hub
