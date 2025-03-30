@@ -103,6 +103,7 @@ set -ue
 
 name=l2
 expdir=exp
+
 python run_pretrain.py \
     --upstream alhubert \
     --upstream_config "pretrain/alhubert/config_model_l2.yaml" \
